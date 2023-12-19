@@ -1,34 +1,14 @@
-import { createInterface } from 'readline';
-
-const getLinesFromStdin = async () => {
-  return new Promise((res, rej) => {
-    const rl = createInterface({
-      input: process.stdin,
-      output: process.stdout,
-      terminal: false
-    });
-
-    let acc = []
-
-    rl.on('line', (line) => {
-      acc.push(line)
-    });
-
-    rl.once('close', () => {
-      res(acc.join("\n"))
-    })
-  })
-}
+import { getLinesFromStdin } from './utils.js';
 
 const numbers = [
   "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
 ]
 
-const getFirstNumber = (line) => {
+const getFirstNumber = (line: string) => {
   for (let i = 0; i < line.length; i++) {
     // string
-    for (let ni = 0; ni < numbers.length; ni++){
-      let n = numbers[ni] 
+    for (let ni = 0; ni < numbers.length; ni++) {
+      let n = numbers[ni]
       if (line.substring(i).startsWith(n)) {
         return ni + 1
       }
@@ -43,11 +23,11 @@ const getFirstNumber = (line) => {
   }
 }
 
-const getLastNumber = (line) => {
+const getLastNumber = (line: string) => {
   for (let i = line.length; i >= 0; i--) {
     // string
-    for (let ni = 0; ni < numbers.length; ni++){
-      let n = numbers[ni] 
+    for (let ni = 0; ni < numbers.length; ni++) {
+      let n = numbers[ni]
       if (line.substring(i).startsWith(n)) {
         return ni + 1
       }
